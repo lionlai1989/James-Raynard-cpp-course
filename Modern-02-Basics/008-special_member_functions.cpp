@@ -11,16 +11,20 @@ class Test {
   public:
     // constructor
     Test(int i, string str) : i(i), str(str) { cout << "constructor" << endl; }
+
     // copy constructor
     Test(const Test &other) : i(other.i), str(other.str) { cout << "copy constructor" << endl; }
-    // copy assignment operator
+
+    // copy assignment operator. Explain why it needs to use a reference to other.
     Test &operator=(const Test &other) {
         cout << "copy assignment operator" << endl;
         i = other.i;
         str = other.str;
         return *this;
     }
+
     void print() const { cout << "i: " << i << " str: " << str << endl; }
+
     // destructor
     ~Test() { cout << "destructor" << endl; }
 };
