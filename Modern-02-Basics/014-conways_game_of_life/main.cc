@@ -4,8 +4,8 @@
 // #include "ansi_escapes.h"
 
 /**
- * g++ -std=c++17 -Wall -Wextra -pedantic main.cc grid.cc cell.cc ansi_escapes.cc -o game_of_life
- * Run `./game_of_life`
+ * g++ -std=c++17 -Wall -Wextra -pedantic main.cc grid.cc cell.cc ansi_escapes.cc
+ * Run `./a.out`
  * Press return to display each generation
  * Type ctrl+c to stop the program
  *
