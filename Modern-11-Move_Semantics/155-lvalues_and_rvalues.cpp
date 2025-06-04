@@ -9,8 +9,9 @@
  * Value semantics avoid the need for a garbage collector.
  *
  * In C++, an object can be either an lvalue or an rvalue.
- * An lvalue represents a named memory location. It has a name and we can take its address using the & operator.
- * And everything that is not an lvalue is an rvalue.
+ * An lvalue represents a named memory location. It has a name and we can take its address using the
+ * & operator. And everything that is not an lvalue is an rvalue.
+ *
  * x = 2; // x is an lvalue, 2 is an rvalue
  * x = func(); // x is an lvalue, return value of func() is an rvalue
  *
@@ -30,12 +31,14 @@
  * func(&x); // Pass lvalue
  * func(&2); // Pass rvalue. Error!
  *
- * Passing address of a variable or non-const reference to a function usually means that the function will modify the
- * value of the variable. It makes no sense to pass an rvalue to such a function. Thus, it's not allowed.
+ * Passing address of a variable or non-const reference to a function usually means that the
+ * function will modify the value of the variable. It makes no sense to pass an rvalue to such a
+ * function. Thus, it's not allowed.
  *
  * In C++11, the argument can be moved if an object is an rvalue and type if "moveable".
  * An object will be copied if it's an lvalue or type is not "moveable".
  */
+
 #include <iostream>
 
 using namespace std;

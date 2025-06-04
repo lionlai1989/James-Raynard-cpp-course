@@ -26,29 +26,34 @@
  * - `func(x); func(2);` We can pass an lvalue or an rvalue.
  *
  * 4. rvalue reference. func(int &&x)
- * - `func(2);` We can pass a moveable rvalue but not an lvalue. The function will now own the passed object.
+ * - `func(2);` We can pass a moveable rvalue but not an lvalue. The function will now own the
+ * passed object.
  *
  */
 
 /**
  * Characteristics of lvalues:
- * lvalues represent persistent objects. They occupy memory (either on the stack or heap) which is accessible by the
- * programmer. They remain valid until they go out of scope or are deleted. They include:
+ * lvalues represent persistent objects. They occupy memory (either on the stack or heap) which is
+ * accessible by the programmer. They remain valid until they go out of scope or are deleted. They
+ * include:
  * - Local variables
  * - Global variables
  * - Static variables
  * - Function arguments
  *
  * Characteristics of rvalues:
- * rvalues are stored in locations that are not accessible by the programmer, such as processor registers. They are
- * temporary objects that are destroyed after the expression that creates them is evaluated.
+ * rvalues are stored in locations that are not accessible by the programmer, such as processor
+ * registers. They are temporary objects that are destroyed after the expression that creates them
+ * is evaluated.
  *
  * C++ has three "Value Categories":
- * - Literals: They have no name and can not be referred to again. They are called pure rvalues or "prvalues".
- * - Temporary objects: They represent an object and their data can be moved. They are called "xvalues" (eXpiring
- * values).
+ * - Literals: They have no name and can not be referred to again. They are called pure rvalues or
+ * "prvalues".
+ * - Temporary objects: They represent an object and their data can be moved. They are called
+ * "xvalues" (eXpiring values).
  * - lvalues: They are objects that have a name and can be referred to again.
  */
+
 #include <iostream>
 #include <string>
 
@@ -81,18 +86,19 @@ int main() {
     test(lr);
 
     /**
-     * If we want to pass an lvalue to a function that takes an rvalue reference, we must cast it to an rvalue.
-     * std::move() does not move anything. All it does is cast an lvalue to an rvalue.
+     * If we want to pass an lvalue to a function that takes an rvalue reference, we must cast it to
+     * an rvalue. std::move() does not move anything. All it does is cast an lvalue to an rvalue.
      * This will move the object "l" into the function argument.
-     * After `l` is moved, `l`'s data may be empty or unusable. If we want to use `l` again, we must reassign its data.
+     * After `l` is moved, `l`'s data may be empty or unusable. If we want to use `l` again, we must
+     * reassign its data.
      */
     cout << "std::move(): \n";
     test(std::move(l)); // l can no longer be used
     cout << "\n";
 
     /**
-     * Although r is declared as an rvalue reference, it is actually an lvalue! Because r fulfills the definition of an
-     * lvalue: it has an identity and a name.
+     * Although r is declared as an rvalue reference, it is actually an lvalue! Because r fulfills
+     * the definition of an lvalue: it has an identity and a name.
      */
     string &&r{string{"Temp"}};
     cout << "Rvalue variable: ";
