@@ -38,7 +38,7 @@ T Max(const T &t1, const T &t2) { // The arguments and return value have this ty
 // g++ -std=c++20 -Wall -Wextra -pedantic 023-templates_overview.cpp && ./a.out
 int main() {
     // When we call Max, the compiler will instantiate the function from the template code, with T
-    // replaced by the type of the arguments. The compiler deduces the type of T  to be double.
+    // replaced by the type of the arguments. The compiler deduces the type of T to be double.
     cout << Max(7.0, 2.6) << endl; // Expands template to:
     /**
      * double Max(const double& t1, const double& t2) {
