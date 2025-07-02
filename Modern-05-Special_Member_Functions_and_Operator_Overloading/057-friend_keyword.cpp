@@ -12,6 +12,7 @@ class Test {
     friend void print(const Test &);
 };
 
+// A non-member function can access all the private and public members of Test.
 void print(const Test &test) { cout << "i = " << test.i << ", s = " << test.s << endl; }
 
 class Test2 {
@@ -29,6 +30,7 @@ class Test2 {
 
 class Example {
   public:
+    // A member function of Example can access all the private and public members of Test2.
     void print(const Test2 &test) { cout << "i = " << test.i << ", s = " << test.s << endl; }
 };
 
