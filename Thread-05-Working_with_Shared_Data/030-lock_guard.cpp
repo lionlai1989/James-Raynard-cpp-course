@@ -56,7 +56,7 @@ void task2(std::string str) {
             // End of critical section
 
             // The mutex is still locked here after the end of the critical section. Other threads
-            // cannot lock the mutex until the lock_guard object is destroyed.
+            // cannot lock the mutex until the lock_guard object is destroyed by the destructor.
 
             std::this_thread::sleep_for(50ms);
         } // Calls ~std::lock_guard. The destructor calls task_mutex2.unlock()
