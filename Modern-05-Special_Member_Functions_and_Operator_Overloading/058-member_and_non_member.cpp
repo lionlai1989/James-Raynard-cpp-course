@@ -60,6 +60,8 @@ class String2 {
     String2(const char *str) : s(str) {}
     String2(const string &s) : s(s) {}
 
+    // Non-member function. It is a non-member function not because "friend" is used, but because
+    // the function signature and the function definition lives outside the class.
     friend String2 operator+(const String2 &arg1, const String2 &arg2);
 
     void print() { cout << s << endl; }
