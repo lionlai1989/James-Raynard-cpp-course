@@ -66,7 +66,7 @@ void func4(std::mt19937 &ref_mt) {
         std::cout << dist(ref_mt) << ", ";
 }
 
-// g++ -std=c++20 -Wall -Wextra -pedantic -pthread 036-thread-local_variables.cpp && ./a.out
+// g++ -std=c++20 -Wall -Wextra -pedantic -pthread 036-thread_local_variables.cpp && ./a.out
 int main() {
     std::cout << "Thread 1's random values:\n";
     std::thread thr1(func);
