@@ -12,6 +12,7 @@
 // All the philosophers are waiting for their neighbour
 //
 // The philosophers are blocked indefinitely.
+// Deadlock
 
 #include <chrono>
 #include <iostream>
@@ -111,7 +112,7 @@ void dine(int phil_no) {
     std::this_thread::sleep_for(think_time);
 }
 
-// g++ -std=c++20 -Wall -Wextra -pedantic -pthread 040-deadlock_practical.cpp && ./a.out
+// g++ -std=c++20 -Wall -Wextra -pthread 040-dining_philosophers_problem_part1.cpp && ./a.out
 int main() {
     // The following code will deadlock
 
