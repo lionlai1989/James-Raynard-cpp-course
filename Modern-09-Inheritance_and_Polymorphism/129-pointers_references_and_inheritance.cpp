@@ -31,7 +31,7 @@ void draw_shape(const Circle &c) {
     c.draw(); // Calls draw member function of Circle
 }
 
-// g++ -std=c++20 -Wall -Wextra -pedantic 063-pointers_references_and_inheritance.cpp && ./a.out
+// g++ -std=c++20 -Wall -Wextra -pedantic 129-pointers_references_and_inheritance.cpp && ./a.out
 int main() {
     Circle circle; // Derived class object
     Shape shape;   // Base class object

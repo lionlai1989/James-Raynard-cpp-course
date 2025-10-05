@@ -51,7 +51,7 @@ class Circle : public Shape {
     void draw() { cout << "Drawing a circle...\n"; }
 };
 
-// g++ -std=c++20 -Wall -Wextra -pedantic 064-static_and_dynamic_type.cpp && ./a.out
+// g++ -std=c++20 -Wall -Wextra -pedantic 130-static_and_dynamic_type.cpp && ./a.out
 int main() {
     vector<Shape *> shapes; // Vector of pointers to Shape objects
 
