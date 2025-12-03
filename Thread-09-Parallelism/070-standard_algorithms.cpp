@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 
-// g++ -std=c++20 -Wall -Wextra -pedantic -pthread 070-standard_algorithms.cpp && ./a.out
+// g++ -std=c++20 -Wall -Wextra -pedantic 070-standard_algorithms.cpp && ./a.out
 int main() {
     std::string str("HellO world");
     std::cout << "String to search: " << str << '\n';

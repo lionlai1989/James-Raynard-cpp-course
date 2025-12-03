@@ -122,7 +122,7 @@ double add_parallel2(std::vector<double> &vec) {
     return fut1.get() + fut2.get() + fut3.get() + fut4.get();
 }
 
-// g++ -std=c++20 -Wall -Wextra -pedantic -pthread 069-data_parallelism.cpp && ./a.out
+// g++ -std=c++20 -Wall -Wextra -pedantic 069-data_parallelism.cpp && ./a.out
 int main() {
     /**
      * Data Parallelism Example

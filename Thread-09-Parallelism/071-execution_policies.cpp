@@ -22,7 +22,21 @@
 #include <iostream>
 #include <vector>
 
-// g++ -std=c++20 -Wall -Wextra -pedantic -pthread -ltbb 071-execution_policies.cpp && ./a.out
+/**
+ * Explain why the following command does not work:
+ * g++ -std=c++20 -Wall -Wextra -pedantic -ltbb 071-execution_policies.cpp
+ * But the following command works:
+ * g++ -std=c++20 -Wall -Wextra -pedantic 071-execution_policies.cpp -ltbb
+ *
+ * Reason: the linker processes object files and libraries from left to right. A library such as
+ * -ltbb is only used to satisfy undefined symbols from files that appear *before* it on the
+ * command line. In the first command the library is seen before 071-execution_policies.cpp, so
+ * its symbols are not used to resolve that file's references and the link fails; in the second
+ * command the object file comes first and -ltbb comes last, so the undefined TBB symbols can be
+ * resolved and the link succeeds.
+ *
+ * Takeaway: Libraries should go after the source/object files that use them.
+ */
 int main() {
     /**
      * Sequential execution:
@@ -48,11 +62,11 @@ int main() {
      *   - The programmer MUST prevent data races.
      * `count` is shared between multiple threads without synchronization. This causes a data race.
      */
-    std::vector<int> vec2(20'000);
+    std::vector<int> vec2(2'000);
     int count = 0;
     std::for_each(std::execution::par, vec2.begin(), vec2.end(), [&count](int &x) { x = ++count; });
     for (auto i : vec2)
-        std::cout << i << ',';
+        std::cout << i << ','; // the last element is not guaranteed to be 2000
     std::cout << '\n';
 
     /**
