@@ -4,8 +4,7 @@
 #include <iostream>
 #include <vector>
 
-// g++ -std=c++20 -Wall -Wextra -pedantic -pthread 072-algorithms_and_execution_policies.cpp &&
-// ./a.out
+// g++ -std=c++20 -Wall -Wextra -pedantic 072-algorithms_and_execution_policies.cpp -ltbb && ./a.out
 int main() {
     std::vector<int> vec{3, 1, 4, 1, 5, 9};
 
@@ -18,7 +17,7 @@ int main() {
         // Predicate throws an exception
         std::sort(vec.begin(), vec.end(), [](int a, int b) {
             throw std::out_of_range("Oops");
-            return true;
+            return a > b;
         });
     } catch (std::exception &e) {
         std::cout << "Caught exception: " << e.what() << '\n';
@@ -40,10 +39,16 @@ int main() {
     try {
         std::sort(std::execution::seq, vec.begin(), vec.end(), [](int a, int b) {
             throw std::out_of_range("Oops");
-            return true;
+            return a < b;
         });
     } catch (std::exception &e) {
-        // This block will not be executed because std::terminate() is called
+        /**
+         * This block will not be executed because std::terminate() is called
+         *
+         * terminate called after throwing an instance of 'std::out_of_range'
+         *   what():  Oops
+         * Aborted (core dumped)
+         */
         std::cout << "Caught exception: " << e.what() << '\n';
     }
 }
