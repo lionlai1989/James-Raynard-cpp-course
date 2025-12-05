@@ -1,7 +1,8 @@
 #include <iostream>
 #include <string>
+#include <type_traits>
 
-using namespace std;
+using namespace std; // For brevity in this example
 
 /**
  * The reason why get_string() does not compile is that both branches of the runtime `if` statement
@@ -41,7 +42,7 @@ template <typename T> string get_string(const T &arg) {
  * - SFINAE: Complex syntax, harder to understand, verbose → Rarely needed nowadays
  */
 template <typename T> string get_string2(const T &arg) {
-    if constexpr (std::is_same<std::string, T>::value)
+    if constexpr (std::is_same_v<std::string, T>)
         return arg; // Not compiled if T is built-in type
     else
         return to_string(arg); // Not compiled if T is std::string
@@ -56,7 +57,7 @@ template <typename T> string get_string2(const T &arg) {
  *
  * When the compiler instantiates get_string3, it chooses the most specific matching template:
  * - get_string3(42) matches the primary template with T = int
- * - get_string3("hello") matches the explicit specialization for std::string (more specific)
+ * - get_string3(str) (where str is std::string) matches the explicit specialization for std::string
  *
  * Advantages:
  * - Works in C++98 and later
