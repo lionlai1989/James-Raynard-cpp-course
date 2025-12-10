@@ -8,12 +8,15 @@ int main() {
     string str{"Hello world"};
     str[1] = 'a'; // Change 2nd character to 'a'
 
-    string s1 = str.substr(6);    // Returns "world"
-    string s2 = str.substr(6, 2); // Returns "wo"
+    string s1 = str.substr(6);       // Returns "world"
+    string s2 = str.substr(6, 2);    // Returns "wo"
+    const char *pchar = str.c_str(); // null-terminated C-style string
 
     cout << str << endl;
     cout << s1 << endl;
     cout << s2 << endl;
+    cout << pchar << endl; // cout overload operator<< for C-style strings
+    cout << static_cast<const void *>(pchar) << endl; // print numerical value of the pointer
 
     cout << "--------------------------------" << endl;
 
@@ -30,7 +33,7 @@ int main() {
     cout << "triple_x has " << triple_x.size() << " characters: " << triple_x << endl;
 
     // Initializer list
-    string howdy{'H', 'e', 'l', 'l', 'o'};
+    string howdy{'h', 'o', 'w', 'd', 'y'};
     cout << "howdy has " << howdy.size() << " characters: " << howdy << endl;
 
     // substring
