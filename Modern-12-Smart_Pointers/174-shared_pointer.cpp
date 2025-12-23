@@ -1,3 +1,26 @@
+/**
+ * std::shared_ptr
+ *
+ * std::shared_ptr is a smart pointer that retains shared ownership of an object through a pointer.
+ * Several shared_ptr objects may own the same object. The object is destroyed and its memory
+ * deallocated when the last shared_ptr owning the object is destroyed.
+ *
+ * Mechanism:
+ * - When a shared_ptr is copied or assigned, the reference counter is incremented. No memory
+ * allocation for the object is performed.
+ * - When a shared_ptr is destroyed, the reference counter is decremented.
+ * - When the counter reaches zero, the memory is released.
+ *
+ * Implementation:
+ * shared_ptr typically stores two pointers:
+ * 1. A pointer to the allocated memory (the managed object).
+ * 2. A pointer to a control block (contains the reference counter and other data).
+ *
+ * shared_ptr vs unique_ptr:
+ * - unique_ptr: Zero overhead compared to a raw pointer (exclusive ownership).
+ * - shared_ptr: Additional overhead for the control block and atomic reference counting.
+ */
+
 #include <iostream> // cout
 #include <memory>   // shared_ptr, make_shared
 
