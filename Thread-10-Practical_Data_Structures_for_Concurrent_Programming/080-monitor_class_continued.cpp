@@ -67,7 +67,7 @@ int main() {
     Monitor<Bank> bank_mon;
     // Invoke its function call operator and
     // pass a callable object which takes a Bank argument
-    bank_mon([](Bank bank) {
+    bank_mon([](Bank &bank) {
         // Call its member functions, all under the same lock
         bank.debit("Peter", 1000);
         bank.credit("Paul", 1000);
