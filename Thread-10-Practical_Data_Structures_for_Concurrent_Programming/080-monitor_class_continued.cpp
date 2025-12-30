@@ -1,7 +1,6 @@
 // Example of a monitor class
 // Has a data member which is a mutex
 // Each member function locks the mutex when called
-#include <chrono>
 #include <future>
 #include <iostream>
 #include <mutex>
