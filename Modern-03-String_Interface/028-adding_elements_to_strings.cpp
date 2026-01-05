@@ -1,3 +1,22 @@
+/**
+ * Memory Reallocation: The primary cost driver is often memory management. If a modification (like
+ * an insertion) causes the string to exceed its current allocated capacity, the library must:
+ *
+ *    1. Allocate a larger block of memory.
+ *    2. Copy all existing characters to the new memory location.
+ *    3. Deallocate the old memory block.
+ *
+ * This is an expensive operation that typically results in amortized linear time complexity, but
+ * can be much slower in specific instances.
+ *
+ * Data Shifting: Operations like inserting into or erasing from the middle of a string require
+ * moving all the subsequent characters to their new positions in memory. This is a linear time
+ * operation (O(N), where N is the number of characters after the insertion/deletion point).
+ *
+ * Appending vs. Middle Insertion: Appending to the end is generally more efficient than inserting
+ * into the middle because it only involves data shifting when the capacity is exceeded.
+ */
+
 #include <iostream>
 #include <string>
 
