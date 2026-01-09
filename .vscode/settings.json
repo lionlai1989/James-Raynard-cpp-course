@@ -1,7 +1,8 @@
 {
+    "files.eol": "\n",
     "editor.formatOnSave": true,
     "editor.formatOnType": true,
-    "editor.defaultFormatter": "ms-vscode.cpptools",
+    "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd",
     "editor.insertSpaces": true,
     "editor.tabSize": 4,
     "files.associations": {
@@ -93,6 +94,7 @@
         "typeindex": "cpp",
         "typeinfo": "cpp",
         "valarray": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "execution": "cpp"
     }
 }
