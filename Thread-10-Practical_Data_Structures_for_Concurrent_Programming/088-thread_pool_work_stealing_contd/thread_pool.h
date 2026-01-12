@@ -5,8 +5,10 @@
 #ifndef THREAD_POOL_H
 #define THREAD_POOL_H
 
+#include <atomic>
 #include <functional>
 #include <memory>
+#include <mutex>
 #include <queue>
 #include <random>
 #include <thread>
@@ -38,6 +40,9 @@ class ThreadPool {
 
     // The number of threads in the pool
     int thread_count;
+
+    // Protect shared state in random number engine
+    std::mutex rand_mut;
 
   public:
     ThreadPool();

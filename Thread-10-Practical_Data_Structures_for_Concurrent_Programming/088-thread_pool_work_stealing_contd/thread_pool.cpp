@@ -9,9 +9,6 @@
 
 using namespace std::literals;
 
-// Protect shared state in random number engine
-std::mutex rand_mut;
-
 // Constructor
 ThreadPool::ThreadPool() {
     this->thread_count = std::thread::hardware_concurrency() - 1;
@@ -45,7 +42,7 @@ ThreadPool::~ThreadPool() {
 // Returns a random number between 0 and thread_count-1
 int ThreadPool::get_random() {
     // random number engine has a shared state, so we need to protect it with a mutex
-    std::lock_guard<std::mutex> lck_guard(rand_mut);
+    std::lock_guard<std::mutex> lck_guard(this->rand_mut);
     std::uniform_int_distribution<int> dist(0, this->thread_count - 1);
     return dist(mt);
 }
