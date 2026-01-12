@@ -1,11 +1,5 @@
 /**
  * Thread pool with multiple queues
- * In `085-thread_pool_basic_implementation`, it only has one queue, which can become a bottleneck:
- *   - When a thread takes a task off the queue, it locks the queue.
- *   - Other threads are blocked waiting for the queue to become available.
- *   - If there are many small tasks, the queue can become a bottleneck.
- * A better approach is to have multiple queues, one for each thread so that a thread never waits
- * for another thread. But this approach requires more memory.
  */
 
 #include "thread_pool.h"

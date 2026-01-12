@@ -24,15 +24,16 @@
  */
 
 #include "thread_pool.h"
+
 #include <iostream>
 
 ThreadPool::ThreadPool() {
     // -1 to leave one core for the main thread or the OS
-    thread_count = std::thread::hardware_concurrency() - 1;
-    std::cout << "Creating a thread pool with " << thread_count << " threads\n";
+    this->thread_count = std::thread::hardware_concurrency() - 1;
+    std::cout << "Creating a thread pool with " << this->thread_count << " threads\n";
 
     // Start the threads
-    for (int i = 0; i < thread_count; ++i)
+    for (int i = 0; i < this->thread_count; ++i)
         // Create a thread that executes the 'worker' member function.
         // We pass '&ThreadPool::worker' as the function to run.
         // We pass 'this' as the object instance because 'worker' is a non-static member function.
@@ -40,13 +41,12 @@ ThreadPool::ThreadPool() {
 }
 
 ThreadPool::~ThreadPool() {
-    stop = true;
-
-    // Push empty tasks to wake up the threads.
+    // Push empty tasks (poison pills) to stop the threads.
     // Threads are blocked in the work_queue.pop() function.
-    // Pushing a task will wake up a thread, which will then check the stop flag.
-    for (int i = 0; i < thread_count; ++i) {
-        work_queue.push([] {});
+    // Pushing a task will wake up a thread, which will then check if the task is valid.
+    for (int i = 0; i < this->thread_count; ++i) {
+        // If an empty lambda `[]() {}` is pushed, it evaluates to true.
+        this->work_queue.push(Func{});
     }
 
     // Wait for the threads to finish
@@ -57,11 +57,15 @@ ThreadPool::~ThreadPool() {
 
 // Entry point function for the threads
 void ThreadPool::worker() {
-    while (!stop) {
+    while (true) {
         Func task;
 
         // Take a task function off the queue
         this->work_queue.pop(task);
+
+        // Check for poison pill (empty task)
+        if (!task)
+            break;
 
         // Invoke it
         task();

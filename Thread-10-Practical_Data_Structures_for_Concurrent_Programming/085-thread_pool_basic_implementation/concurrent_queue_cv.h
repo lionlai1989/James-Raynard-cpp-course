@@ -1,7 +1,7 @@
-// Simple concurrent queue implementation
-// with condition variable
-// pop() blocks when the queue is empty
-// push() polls when the queue is full
+/**
+ * Simple concurrent queue implementation with two condition variables
+ */
+
 #ifndef CONCURRENT_QUEUE_CV_H
 #define CONCURRENT_QUEUE_CV_H
 
@@ -15,17 +15,20 @@ using namespace std::literals;
 // Concurrent queue class
 template <class T> class ConcurrentQueueCondVar {
   private:
-    // Data members
     std::mutex mut;
     std::queue<T> que;
+
+    // Two condition variables must be used. Only one is not enough.
     std::condition_variable cv_not_empty;
     std::condition_variable cv_not_full;
-    size_t max{50};
+
+    // Maximum number of elements in the queue
+    std::size_t max{50};
 
   public:
     // Constructors
     ConcurrentQueueCondVar() = default;
-    ConcurrentQueueCondVar(size_t max) : max(max) {};
+    ConcurrentQueueCondVar(std::size_t max) : max(max) {};
 
     // Deleted special member functions
     ConcurrentQueueCondVar(const ConcurrentQueueCondVar &) = delete;

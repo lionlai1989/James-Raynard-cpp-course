@@ -1,11 +1,15 @@
-// Thread pool with single queue
+/**
+ * Thread pool with single queue
+ */
+
 #ifndef THREAD_POOL_H
 #define THREAD_POOL_H
 
 #include "concurrent_queue_cv.h"
-#include <atomic>
+
 #include <functional>
 #include <thread>
+#include <vector>
 
 // Type alias to simplify the code
 // All the task functions will have this type. No parameters and no return value.
@@ -24,9 +28,6 @@ class ThreadPool {
 
     // The number of threads in the pool
     int thread_count;
-
-    // Flag to signal the threads to stop
-    std::atomic<bool> stop{false};
 
   public:
     ThreadPool();

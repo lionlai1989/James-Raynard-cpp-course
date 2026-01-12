@@ -1,4 +1,7 @@
-// Test program for thread pool with single queue
+/**
+ * Test program for thread pool with only a single queue
+ */
+
 #include "thread_pool.h"
 #include <iostream>
 
