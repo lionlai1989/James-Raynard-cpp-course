@@ -6,14 +6,15 @@
 
 #include "constants.h"
 
-using namespace std;
+// using namespace std;
 using namespace std::literals;
 
 // Class to represent the creature moving around the screen
 class Creature {
+  private:
     // Static random number engine and Bernoulli distribution objects
-    static mt19937 mt;
-    static bernoulli_distribution bd;
+    static std::mt19937 mt;
+    static std::bernoulli_distribution bd;
 
     // Define some properties of the creature
     // SFML uses float internally
@@ -36,44 +37,44 @@ class Creature {
     Creature(float x, float y) {
         // Set the initial position and velocity
         // Use (x, y) for the initial position
-        velocity = {vx, vy};
-        circle.setPosition({x, y});
+        this->velocity = {this->vx, this->vy};
+        this->circle.setPosition({x, y});
 
         // Set the graphical properties
-        circle.setRadius(5.0f);
-        circle.setFillColor(sf::Color::Red);
+        this->circle.setRadius(5.0f);
+        this->circle.setFillColor(sf::Color::Red);
     }
 
     void draw(sf::RenderWindow &window) {
         // Ask the window to draw the shape for us
-        window.draw(circle);
+        window.draw(this->circle);
     }
 
     // Compute the creature's new position
     void update() {
         // Change the direction of movement at random
-        vx = bd(mt) ? vx : -vx;
-        vy = bd(mt) ? vy : -vy;
+        this->vx = bd(mt) ? this->vx : -this->vx;
+        this->vy = bd(mt) ? this->vy : -this->vy;
 
         // Move the creature to its new position
-        circle.move({vx, vy});
+        this->circle.move({this->vx, this->vy});
     }
 };
 
 // Initialize static members
-mt19937 Creature::mt;
-bernoulli_distribution Creature::bd;
+std::mt19937 Creature::mt;
+std::bernoulli_distribution Creature::bd;
 
 // The main function for the program
 int main() {
     // Create a creature object in the middle of the screen
-    Creature the_creature(constants::window_width / 2.0, constants::window_height / 2.0);
+    Creature the_creature(Constants::window_width / 2.0, Constants::window_height / 2.0);
 
     // Create the game's window using an object of class RenderWindow
     // The constructor takes an SFML 2D vector with the window dimensions
     // and an std::string with the window title
     // The SFML code is in the sf namespace
-    sf::RenderWindow window{sf::VideoMode({constants::window_width, constants::window_height}),
+    sf::RenderWindow window{sf::VideoMode({Constants::window_width, Constants::window_height}),
                             "Random Walk"s};
 
     // Limit the framerate

@@ -1,23 +1,20 @@
 // Code for a "breakout" game
 // Based on a talk by Vittorio Romeo
 // Uses the SFML graphics library
-
-// 1. Related header (Not applicable for main.cc usually)
-
-// 2. Standard Library
-#include <optional>
-#include <string>
-
-// 3. Third-party Library
 #include <SFML/Graphics.hpp>
 
-// 4. Local Project Headers
 #include "constants.h"
+#include <SFML/Graphics/RenderWindow.hpp>
+
+#include "background.h"
 
 using namespace std::string_literals;
 
 // The main function for the program
 int main() {
+    // Create the background object
+    Background the_background(0.0f, 0.0f);
+
     // Create the game's window using an object of class RenderWindow
     // The constructor takes an SFML 2D vector with the window dimensions
     // and an std::string with the window title
@@ -44,15 +41,17 @@ int main() {
         while (const std::optional event = game_window.pollEvent()) {
             if (event->is<sf::Event::Closed>())
                 game_window.close();
-            else if (const auto *keyPressed = event->getIf<sf::Event::KeyPressed>();
-                     keyPressed && keyPressed->code == sf::Keyboard::Key::Escape)
-                game_window.close();
+            else if (const auto *keyPressed = event->getIf<sf::Event::KeyPressed>()) {
+                if (keyPressed->code == sf::Keyboard::Key::Escape)
+                    game_window.close();
+            }
         }
 
         // Calculate the updated graphics
-        // This space left intentionally blank!
+        the_background.update();
 
         // Display the updated graphics
+        the_background.draw(game_window);
         game_window.display();
     }
 }
